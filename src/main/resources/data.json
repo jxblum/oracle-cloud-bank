@@ -1,6 +1,6 @@
 {
-	"name": "Dave",
-	"type": "LOAN",
-	"customerId": "abc123xyz",
-	"otherDetail": "car loan"
+	"name": "PieDoe",
+	"type": "CREDIT",
+	"customerId": "abc123uandme",
+	"otherDetails": "It pays to Discover!"
 }
