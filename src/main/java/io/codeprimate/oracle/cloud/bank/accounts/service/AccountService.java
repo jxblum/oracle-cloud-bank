@@ -28,15 +28,15 @@ public class AccountService {
 
 	private final AccountRepository accountRepository;
 
-	public List<Account> getAccounts() {
+	public List<Account> getAll() {
 		return getAccountRepository().findAll();
 	}
 
-	public Account getAccount(Long id) {
+	public Account get(Long id) {
 		return getAccountRepository().findById(id).orElseThrow();
 	}
 
-	public Account createAccount(Account account) {
+	public Account save(Account account) {
 		return getAccountRepository().saveAndFlush(account);
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -40,22 +41,23 @@ public class AccountController {
 
 	@GetMapping("/accounts")
 	public List<Account> accounts() {
-		return getAccountService().getAccounts();
+		return getAccountService().getAll();
 	}
 
 	@GetMapping("/accounts/{id}")
 	public Account getAccount(@PathVariable(name = "id") Long id) {
-		return getAccountService().getAccount(id);
+		return getAccountService().get(id);
 	}
 
 	@PostMapping(value = "/accounts")
-	public ResponseEntity<Account> saveAccount(@RequestBody Account account) {
-		return ResponseEntity.created(URI.create("/accounts/{id}"))
-			.body(getAccountService().createAccount(account));
+	public ResponseEntity<Account> saveAccount(@RequestBody Account account, UriComponentsBuilder uriBuilder) {
+		Account savedAccount = getAccountService().save(account);
+		URI accountUri = uriBuilder.path("/accounts/{id}").buildAndExpand(savedAccount.getId()).toUri();
+		return ResponseEntity.created(accountUri).body(account);
 	}
 
 	@ExceptionHandler
 	public ResponseEntity<?> exceptionHandler(Throwable error) {
-		return ResponseEntity.internalServerError().build();
+		return ResponseEntity.internalServerError().body(error.getMessage());
 	}
 }

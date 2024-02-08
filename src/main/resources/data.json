@@ -1,6 +1,6 @@
 {
-	"accountName": "Dave",
-	"accountType": "LOAN",
-	"accountCustomerId": "abc123xyz",
-	"accountOtherDetail": "car loan"
+	"name": "Dave",
+	"type": "LOAN",
+	"customerId": "abc123xyz",
+	"otherDetail": "car loan"
 }
